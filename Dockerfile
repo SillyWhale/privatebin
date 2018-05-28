@@ -8,15 +8,21 @@ ENV PB_ROOT_DIR=/privatebin
 
 RUN \
   apk update && apk upgrade && \
-  apk install curl nginx supervisor ca-certificates tar && \
-  apk install php7-fpm php7-gd php7-mcrypt php7-json php7-zlib php7-pdo php7-pdo_mysql
-
-RUN \
+  apk add curl nginx supervisor ca-certificates tar && \
+  apk add php7-fpm php7-gd php7-mcrypt php7-json php7-zlib php7-pdo php7-pdo_mysql && \
+  rm /etc/nginx/conf.d/default.conf && rm /etc/php7/php-fpm.d/www.conf && \
   mkdir ${PB_ROOT_DIR} && cd ${PB_ROOT_DIR} && \
   curl --silent --location ${PB_URL} --output ${PB_PKG} && \
   tar xf ${PB_PKG} --strip 1 && \
   rm ${PB_PKG} && \
-  cp ${PB_ROOT_DIR}/cfg/conf.sample.php ${PB_ROOT_DIR}
+  apk del tar ca-certificates curl libcurl && rm -rf /var/cache/apk/*
+
+COPY includes/nginx.conf /etc/nginx/default.conf
+COPY includes/php7-fpm.conf /etc/php7/php-fpm.d/privatebin.conf
+COPY includes/supervisord.conf /usr/local/etc/supervisord.conf
+COPY includes/entrypoint.sh /entrypoint.sh
 
 RUN \ 
-  apk del tar ca-certificates curl libcurl && rm -rf /var/cache/apk/*
+  chmod +x /entrypoint.sh
+
+ENTRYPOINT [ "/entrypoint.sh" ]
