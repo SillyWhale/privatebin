@@ -16,6 +16,7 @@ RUN \
   tar xf ${PB_PKG} --strip 1 && \
   rm ${PB_PKG} && \
   mkdir /run/nginx && \
+  mkdir /privatebin-data && \
   echo "daemon off;" >> /etc/nginx/nginx.conf && \
   apk del tar ca-certificates curl libcurl && rm -rf /var/cache/apk/*
 
@@ -23,6 +24,7 @@ COPY includes/nginx.conf /etc/nginx/conf.d/default.conf
 COPY includes/php7-fpm.conf /etc/php7/php-fpm.d/privatebin.conf
 COPY includes/supervisord.conf /usr/local/etc/supervisord.conf
 COPY includes/entrypoint.sh /entrypoint.sh
+COPY includes/privatebin.conf.php ${PB_ROOT_DIR}/cfg/conf.php
 
 RUN \ 
   chmod +x /entrypoint.sh
