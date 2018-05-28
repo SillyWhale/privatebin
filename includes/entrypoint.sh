@@ -6,4 +6,4 @@ fi
 
 chown -R nginx:nginx /privatebin
 supervisord -c /usr/local/etc/supervisord.conf &
-tail -f /var/log/nginx/*
+#tail -f /var/log/nginx/*
