@@ -45,3 +45,5 @@ deploy:swarm:
     - chmod 700 ~/.ssh
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
     - ssh -i ~/.ssh/id_rsa ${CI_SWARM_DEPLOY_USER}@${CI_SWARM_DEPLOY_MANAGER} "docker service update ${SWARM_SVC_NAME} --replicas 2 && docker service update ${SWARM_SVC_NAME} --image ${CONTAINER_RELEASE_IMAGE} --with-registry-auth --force && docker service update ${SWARM_SVC_NAME} --replicas 1"
+  only:
+    - master
