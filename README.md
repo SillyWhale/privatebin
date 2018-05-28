@@ -7,7 +7,7 @@
 | PB_OPEN_DISCUTION | false | Open discution panel by default |
 | PB_PASSWORD | true | Activate password protected paste |
 | PB_BURNAFTERREAD | false | Check burn after read case by default |
-| PB_SIZELIMIT | 2097152 | Maximum paste size |
+| PB_SIZELIMIT | 2097152 | Maximum paste size (In bytes) |
 | PB_TEMPLATE | bootstrap | Pastebin template |
 | PB_QRCODE | true | Activate QRCode sharing |
 | PB_ZEROBINCOMPAT | false | Activate compatibility mode for zerobin |
