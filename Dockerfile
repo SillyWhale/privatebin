@@ -17,7 +17,7 @@ RUN \
   rm ${PB_PKG} && \
   apk del tar ca-certificates curl libcurl && rm -rf /var/cache/apk/*
 
-COPY includes/nginx.conf /etc/nginx/default.conf
+COPY includes/nginx.conf /etc/nginx/conf.d/default.conf
 COPY includes/php7-fpm.conf /etc/php7/php-fpm.d/privatebin.conf
 COPY includes/supervisord.conf /usr/local/etc/supervisord.conf
 COPY includes/entrypoint.sh /entrypoint.sh
