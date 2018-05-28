@@ -16,6 +16,7 @@ RUN \
   tar xf ${PB_PKG} --strip 1 && \
   rm ${PB_PKG} && \
   mkdir /run/nginx && \
+  echo "daemon off;" >> /etc/nginx/nginx.conf
   apk del tar ca-certificates curl libcurl && rm -rf /var/cache/apk/*
 
 COPY includes/nginx.conf /etc/nginx/conf.d/default.conf
