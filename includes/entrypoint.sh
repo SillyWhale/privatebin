@@ -5,5 +5,5 @@ if [ ! -f ${PB_ROOT_DIR}/cfg/conf.php ]; then
 fi
 
 chown -R nginx:nginx /privatebin
-supervisord -c /usr/local/etc/supervisord.conf
-#tail -f /var/log/nginx/*
+supervisord -c /usr/local/etc/supervisord.conf &
+tail -f /supervisord.log /var/log/nginx/privatebin_access.log /var/log/nginx/privatebin_error.log /var/log/nginx/privatebin.access.log
