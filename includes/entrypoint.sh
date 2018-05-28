@@ -11,15 +11,15 @@ PB_QRCODE=${PB_QRCODE:-'true'}
 PB_ZEROBINCOMPAT=${PB_ZEROBINCOMPAT:-'false'}
 PB_DB=${PB_DB:-'none'}
 
-sed -i 's/discussion = true/discussion = ${PB_DISCUTION}/g' ${PB_ROOT_DIR}/cfg/conf.php
-sed -i 's/opendiscussion = false/opendiscussion = ${PB_OPEN_DISCUTION}/g' ${PB_ROOT_DIR}/cfg/conf.php
-sed -i 's/password = true/password = ${PB_PASSWORD}/g' ${PB_ROOT_DIR}/cfg/conf.php
-sed -i 's/fileupload = true/fileupload = ${PB_FILEUPLOAD}/g' ${PB_ROOT_DIR}/cfg/conf.php
-sed -i 's/burnafterreadingselected = false/burnafterreadingselected = ${PB_BURNAFTERREAD}/g' ${PB_ROOT_DIR}/cfg/conf.php
-sed -i 's/sizelimit = 2097152/sizelimit = ${PB_SIZELIMIT}/g' ${PB_ROOT_DIR}/cfg/conf.php
-sed -i 's/template = "bootstrap"/template = "${PB_TEMPLATE}"/g' ${PB_ROOT_DIR}/cfg/conf.php
-sed -i 's/qrcode = true/qrcode = ${PB_QRCODE}/g' ${PB_ROOT_DIR}/cfg/conf.php
-sed -i 's/zerobincompatibility = false/zerobincompatibility = ${PB_ZEROBINCOMPAT}/g' ${PB_ROOT_DIR}/cfg/conf.php
+sed -i "s/discussion = true/discussion = ${PB_DISCUTION}/g" ${PB_ROOT_DIR}/cfg/conf.php
+sed -i "s/opendiscussion = false/opendiscussion = ${PB_OPEN_DISCUTION}/g" ${PB_ROOT_DIR}/cfg/conf.php
+sed -i "s/password = true/password = ${PB_PASSWORD}/g" ${PB_ROOT_DIR}/cfg/conf.php
+sed -i "s/fileupload = true/fileupload = ${PB_FILEUPLOAD}/g" ${PB_ROOT_DIR}/cfg/conf.php
+sed -i "s/burnafterreadingselected = false/burnafterreadingselected = ${PB_BURNAFTERREAD}/g" ${PB_ROOT_DIR}/cfg/conf.php
+sed -i "s/sizelimit = 2097152/sizelimit = ${PB_SIZELIMIT}/g" ${PB_ROOT_DIR}/cfg/conf.php
+sed -i "s/template = \"bootstrap\"/template = \"${PB_TEMPLATE}\"/g" ${PB_ROOT_DIR}/cfg/conf.php
+sed -i "s/qrcode = true/qrcode = ${PB_QRCODE}/g" ${PB_ROOT_DIR}/cfg/conf.php
+sed -i "s/zerobincompatibility = false/zerobincompatibility = ${PB_ZEROBINCOMPAT}/g" ${PB_ROOT_DIR}/cfg/conf.php
 
 case ${PB_DB} in
     sqlite)
