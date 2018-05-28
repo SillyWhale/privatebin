@@ -23,6 +23,7 @@ sed -i 's/zerobincompatibility = false/zerobincompatibility = ${PB_ZEROBINCOMPAT
 
 case ${PB_DB} in
     sqlite)
+        echo '' >> ${PB_ROOT_DIR}/cfg/conf.php
         echo '[model]' >> ${PB_ROOT_DIR}/cfg/conf.php
         echo 'class = Database' >> ${PB_ROOT_DIR}/cfg/conf.php
         echo '[model_options]' >> ${PB_ROOT_DIR}/cfg/conf.php
@@ -30,6 +31,7 @@ case ${PB_DB} in
         echo 'opt[12] = true	; PDO::ATTR_PERSISTENT  ' >> ${PB_ROOT_DIR}/cfg/conf.php
     ;;
     mysql)
+        echo '' >> ${PB_ROOT_DIR}/cfg/conf.php
         echo '[model]' >> ${PB_ROOT_DIR}/cfg/conf.php
         echo 'class = Database' >> ${PB_ROOT_DIR}/cfg/conf.php
         echo '[model_options]' >> ${PB_ROOT_DIR}/cfg/conf.php
@@ -40,6 +42,7 @@ case ${PB_DB} in
         echo "opt[12] = true	  ; PDO::ATTR_PERSISTENT"
     ;;
     *)
+        echo '' >> ${PB_ROOT_DIR}/cfg/conf.php
         echo "[model]"  >> ${PB_ROOT_DIR}/cfg/conf.php
         echo "class = Filesystem"  >> ${PB_ROOT_DIR}/cfg/conf.php
         echo "[model_options]"  >> ${PB_ROOT_DIR}/cfg/conf.php
