@@ -29,7 +29,7 @@ then
     echo 'dsn = "sqlite:" PATH "/privatebin-data/db.sq3"' >> ${PB_ROOT_DIR}/cfg/conf.php
     echo 'opt[12] = true	; PDO::ATTR_PERSISTENT  ' >> ${PB_ROOT_DIR}/cfg/conf.php
 elif [ ${PB_DB} -eq 'mysql' ]
-   then
+then
     echo '[model]' >> ${PB_ROOT_DIR}/cfg/conf.php
     echo 'class = Database' >> ${PB_ROOT_DIR}/cfg/conf.php
     echo '[model_options]' >> ${PB_ROOT_DIR}/cfg/conf.php
@@ -39,7 +39,6 @@ elif [ ${PB_DB} -eq 'mysql' ]
     echo "pwd = \"${PB_MYSQL_DB_PASSWORD}\"" >> ${PB_ROOT_DIR}/cfg/conf.php
     echo "opt[12] = true	  ; PDO::ATTR_PERSISTENT"
 else 
-then
     echo "[model]"  >> ${PB_ROOT_DIR}/cfg/conf.php
     echo "class = Filesystem"  >> ${PB_ROOT_DIR}/cfg/conf.php
     echo "[model_options]"  >> ${PB_ROOT_DIR}/cfg/conf.php
