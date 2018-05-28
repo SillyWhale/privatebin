@@ -2,7 +2,7 @@
 
 ## Environment
 | Title | Default value | Action |
-| :---: | :-----------: | :----: |
+| :---: | :-----------: | :----- |
 | PB_DISCUTION | true | Activate Discution |
 | PB_OPEN_DISCUTION | false | Open discution panel by default |
 | PB_PASSWORD | true | Activate password protected paste |
