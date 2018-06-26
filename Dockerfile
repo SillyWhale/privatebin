@@ -1,10 +1,10 @@
 FROM alpine:latest
-LABEL maintainer="Vincent FRICOU <vincent@fricouv.eu>"
+LABEL maintainer="SillyWhale <contact@sillywhale.wtf>"
 
-ENV PB_VERSION=1.1.1
+ENV PB_VERSION=1.1.1 \
+    PB_URL=https://github.com/PrivateBin/PrivateBin/archive/${PB_PKG} \
+    PB_ROOT_DIR=/privatebin
 ENV PB_PKG=${PB_VERSION}.tar.gz
-ENV PB_URL=https://github.com/PrivateBin/PrivateBin/archive/${PB_PKG}
-ENV PB_ROOT_DIR=/privatebin
 
 RUN \
   apk update && apk upgrade && \
