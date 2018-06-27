@@ -1,0 +1,30 @@
+version: '3.6'
+
+services:
+  privatebindb:
+    container_name: db
+    image: mariadb:latest
+    volumes:
+      - ${PWD}/mariadb-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_DATABASE=privatebin
+      - MYSQL_USER=privatebin
+      - MYSQL_PASSWORD=privatebinpassword
+
+  privatebinapp:
+    container_name: app
+    image: sillywhale/privatebin:latest
+    ports:
+      - 80:80
+    volumes:
+      - ${PWD}/privatebin-data:/privatebin-data
+    environment:
+      - PB_DB='mysql'
+      - PB_MYSQL_DB_HOS='privatebindb'
+      - PB_MYSQL_DB_NAME='privatebin'
+      - PB_MYSQL_DB_USERNAME='privatebin'
+      - PB_MYSQL_DB_PASSWORD='privatebinpassword'
+    depends_on:
+      - privatebindb
+    restart: on-failure

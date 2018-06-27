@@ -1,0 +1,13 @@
+version: '3.6'
+
+services:
+  privatebinapp:
+    container_name: privatebin
+    image: sillywhale/privatebin:latest
+    ports:
+      - 80:80
+    volumes:
+      - ${PWD}/privatebin-data:/privatebin-data
+    environment:
+      - PB_DB='sqlite'
+    restart: on-failure
