@@ -21,36 +21,44 @@ sed -i "s/template = \"bootstrap\"/template = \"${PB_TEMPLATE}\"/g" ${PB_ROOT_DI
 sed -i "s/qrcode = true/qrcode = ${PB_QRCODE}/g" ${PB_ROOT_DIR}/cfg/conf.php
 sed -i "s/zerobincompatibility = false/zerobincompatibility = ${PB_ZEROBINCOMPAT}/g" ${PB_ROOT_DIR}/cfg/conf.php
 
-case ${PB_DB} in
-    sqlite)
-        echo '' >> ${PB_ROOT_DIR}/cfg/conf.php
-        echo '[model]' >> ${PB_ROOT_DIR}/cfg/conf.php
-        echo 'class = Database' >> ${PB_ROOT_DIR}/cfg/conf.php
-        echo '[model_options]' >> ${PB_ROOT_DIR}/cfg/conf.php
-        echo 'dsn = "sqlite:" PATH "/privatebin-data/db.sq3"' >> ${PB_ROOT_DIR}/cfg/conf.php
-        echo 'opt[12] = true	; PDO::ATTR_PERSISTENT  ' >> ${PB_ROOT_DIR}/cfg/conf.php
-    ;;
-    mysql)
-        echo '' >> ${PB_ROOT_DIR}/cfg/conf.php
-        echo '[model]' >> ${PB_ROOT_DIR}/cfg/conf.php
-        echo 'class = Database' >> ${PB_ROOT_DIR}/cfg/conf.php
-        echo '[model_options]' >> ${PB_ROOT_DIR}/cfg/conf.php
-        echo "dsn = \"mysql:host=${PB_MYSQL_DB_HOST};dbname=${PB_MYSQL_DB_NAME};charset=UTF8\"" >> ${PB_ROOT_DIR}/cfg/conf.php
-        echo 'tbl = "privatebin_"' >> ${PB_ROOT_DIR}/cfg/conf.php
-        echo "usr = \"${PB_MYSQL_DB_USERNAME}\"" >> ${PB_ROOT_DIR}/cfg/conf.php
-        echo "pwd = \"${PB_MYSQL_DB_PASSWORD}\"" >> ${PB_ROOT_DIR}/cfg/conf.php
-        echo "opt[12] = true	  ; PDO::ATTR_PERSISTENT"
-    ;;
-    *)
-        echo '' >> ${PB_ROOT_DIR}/cfg/conf.php
-        echo "[model]"  >> ${PB_ROOT_DIR}/cfg/conf.php
-        echo "class = Filesystem"  >> ${PB_ROOT_DIR}/cfg/conf.php
-        echo "[model_options]"  >> ${PB_ROOT_DIR}/cfg/conf.php
-        echo 'dir = PATH "/privatebin-data"'  >> ${PB_ROOT_DIR}/cfg/conf.php
-    ;;
-esac
+if [ ! -f /privatebin-data/configured.lock ]
+then
+    case ${PB_DB} in
+        sqlite)
+            echo '' >> ${PB_ROOT_DIR}/cfg/conf.php
+            echo '[model]' >> ${PB_ROOT_DIR}/cfg/conf.php
+            echo 'class = Database' >> ${PB_ROOT_DIR}/cfg/conf.php
+            echo '[model_options]' >> ${PB_ROOT_DIR}/cfg/conf.php
+            echo 'dsn = "sqlite:" PATH "/privatebin-data/db.sq3"' >> ${PB_ROOT_DIR}/cfg/conf.php
+            echo 'opt[12] = true	; PDO::ATTR_PERSISTENT  ' >> ${PB_ROOT_DIR}/cfg/conf.php
+            touch /privatebin-data/configured.lock
+        ;;
+        mysql)
+            echo '' >> ${PB_ROOT_DIR}/cfg/conf.php
+            echo '[model]' >> ${PB_ROOT_DIR}/cfg/conf.php
+            echo 'class = Database' >> ${PB_ROOT_DIR}/cfg/conf.php
+            echo '[model_options]' >> ${PB_ROOT_DIR}/cfg/conf.php
+            echo "dsn = \"mysql:host=${PB_MYSQL_DB_HOST};dbname=${PB_MYSQL_DB_NAME};charset=UTF8\"" >> ${PB_ROOT_DIR}/cfg/conf.php
+            echo 'tbl = "privatebin_"' >> ${PB_ROOT_DIR}/cfg/conf.php
+            echo "usr = \"${PB_MYSQL_DB_USERNAME}\"" >> ${PB_ROOT_DIR}/cfg/conf.php
+            echo "pwd = \"${PB_MYSQL_DB_PASSWORD}\"" >> ${PB_ROOT_DIR}/cfg/conf.php
+            echo "opt[12] = true	  ; PDO::ATTR_PERSISTENT"
+            touch /privatebin-data/configured.lock
+        ;;
+        *)
+            echo '' >> ${PB_ROOT_DIR}/cfg/conf.php
+            echo "[model]"  >> ${PB_ROOT_DIR}/cfg/conf.php
+            echo "class = Filesystem"  >> ${PB_ROOT_DIR}/cfg/conf.php
+            echo "[model_options]"  >> ${PB_ROOT_DIR}/cfg/conf.php
+            echo 'dir = PATH "/privatebin-data"'  >> ${PB_ROOT_DIR}/cfg/conf.php
+            touch /privatebin-data/configured.lock
+        ;;
+    esac
+fi
 
-chown -R nginx:nginx /privatebin /privatebin-data
+chown -R nginx:nginx /privatebin 
+chown -R nobody:nogroup /privatebin-data
 supervisord -c /usr/local/etc/supervisord.conf &
-sleep 5
+echo "Logs will displayed in 10 seconds"
+sleep 10
 tail -f /supervisord.log /var/log/nginx/privatebin_access.log /var/log/nginx/privatebin_error.log /var/log/nginx/privatebin.access.log
