@@ -21,7 +21,7 @@ sed -i "s/template = \"bootstrap\"/template = \"${PB_TEMPLATE}\"/g" ${PB_ROOT_DI
 sed -i "s/qrcode = true/qrcode = ${PB_QRCODE}/g" ${PB_ROOT_DIR}/cfg/conf.php
 sed -i "s/zerobincompatibility = false/zerobincompatibility = ${PB_ZEROBINCOMPAT}/g" ${PB_ROOT_DIR}/cfg/conf.php
 
-if [ ! -f /privatebin-data/configured.lock ]
+if [ ! -f /privatebin/configured.lock ]
 then
     case ${PB_DB} in
         sqlite)
