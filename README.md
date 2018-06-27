@@ -65,7 +65,7 @@ This yields us a virtual image size of about 4MB image.
 
 ## Documentation
 
-This image is well documented. [Check out the documentation at Viewdocs](http://docs.sillywhale.com/privatebin/).
+This image is well documented. [Check out the documentation at Viewdocs](http://docs.sillywhale.wtf/privatebin/).
 
 # License
 
