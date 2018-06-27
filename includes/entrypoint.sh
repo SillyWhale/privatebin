@@ -31,7 +31,7 @@ then
             echo '[model_options]' >> ${PB_ROOT_DIR}/cfg/conf.php
             echo 'dsn = "sqlite:" PATH "/privatebin-data/db.sq3"' >> ${PB_ROOT_DIR}/cfg/conf.php
             echo 'opt[12] = true	; PDO::ATTR_PERSISTENT  ' >> ${PB_ROOT_DIR}/cfg/conf.php
-            touch /privatebin-data/configured.lock
+            touch /privatebin/configured.lock
         ;;
         mysql)
             echo '' >> ${PB_ROOT_DIR}/cfg/conf.php
@@ -43,7 +43,7 @@ then
             echo "usr = \"${PB_MYSQL_DB_USERNAME}\"" >> ${PB_ROOT_DIR}/cfg/conf.php
             echo "pwd = \"${PB_MYSQL_DB_PASSWORD}\"" >> ${PB_ROOT_DIR}/cfg/conf.php
             echo "opt[12] = true	  ; PDO::ATTR_PERSISTENT"
-            touch /privatebin-data/configured.lock
+            touch /privatebin/configured.lock
         ;;
         *)
             echo '' >> ${PB_ROOT_DIR}/cfg/conf.php
@@ -51,7 +51,7 @@ then
             echo "class = Filesystem"  >> ${PB_ROOT_DIR}/cfg/conf.php
             echo "[model_options]"  >> ${PB_ROOT_DIR}/cfg/conf.php
             echo 'dir = PATH "/privatebin-data"'  >> ${PB_ROOT_DIR}/cfg/conf.php
-            touch /privatebin-data/configured.lock
+            touch /privatebin/configured.lock
         ;;
     esac
 fi
