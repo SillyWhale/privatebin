@@ -38,7 +38,7 @@ ENV PB_PKG=${PB_VERSION}.tar.gz
 RUN \
   apk update && apk upgrade && \
   apk add curl nginx supervisor ca-certificates tar && \
-  apk add php7-fpm php7-gd php7-mcrypt php7-json php7-zlib php7-pdo php7-pdo_mysql && \
+  apk add php7-fpm php7-gd php7-mcrypt php7-json php7-zlib php7-pdo php7-pdo_mysql php7-sqlite3 php7-pdo_sqlite && \
   rm /etc/nginx/conf.d/default.conf && rm /etc/php7/php-fpm.d/www.conf && \
   mkdir ${PB_ROOT_DIR} && cd ${PB_ROOT_DIR} && \
   curl --silent --location ${PB_URL} --output ${PB_PKG} && \

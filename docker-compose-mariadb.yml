@@ -20,11 +20,11 @@ services:
     volumes:
       - ${PWD}/privatebin-data:/privatebin-data
     environment:
-      - PB_DB='mysql'
-      - PB_MYSQL_DB_HOS='privatebindb'
-      - PB_MYSQL_DB_NAME='privatebin'
-      - PB_MYSQL_DB_USERNAME='privatebin'
-      - PB_MYSQL_DB_PASSWORD='privatebinpassword'
+      - PB_DB=mysql
+      - PB_MYSQL_DB_HOST=privatebindb
+      - PB_MYSQL_DB_NAME=privatebin
+      - PB_MYSQL_DB_USERNAME=privatebin
+      - PB_MYSQL_DB_PASSWORD=privatebinpassword
     depends_on:
       - privatebindb
     restart: on-failure

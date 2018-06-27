@@ -9,5 +9,5 @@ services:
     volumes:
       - ${PWD}/privatebin-data:/privatebin-data
     environment:
-      - PB_DB='sqlite'
+      - PB_DB=sqlite
     restart: on-failure
