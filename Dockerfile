@@ -1,7 +1,7 @@
 FROM alpine:latest
 LABEL maintainer="SillyWhale <contact@sillywhale.wtf>"
 
-ENV PB_VERSION=1.1.1
+ENV PB_VERSION=1.2.1
 ENV PB_PKG=${PB_VERSION}.tar.gz
 ENV PB_URL=https://github.com/PrivateBin/PrivateBin/archive/${PB_PKG}
 ENV PB_ROOT_DIR=/privatebin
